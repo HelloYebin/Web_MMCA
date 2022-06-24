@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+	* {margin: 0; padding: 0}
+	
+	section {
+		width: 90%;
+		text-align: center;
+		min-height: 600px;
+		margin: 0 auto;
+		padding: 40px;
+		box-sizing: border-box;
+		box-shadow: 0px 0px 10px gray;
+	}
+	
+	#list {
+		width: 80%;
+		margin: 0 auto;
+	}
+	
+	.show_info {
+		border: 1px solid black;
+		padding: 20px;
+		position: relative;
+		height: 190px;
+		box-sizing: border-box;
+		margin-bottom: 20px;
+		text-align: left;
+	}
+	.show_poster {
+		width: 150px; height: 150px;
+		float: left;
+		margin-right: 20px;
+	}
+	.show_title {
+		font-weight: bold;
+	}
+	.show_desc {
+		color: gray;
+		font-size: 14px;
+	}
+	.rcancel {
+		position: absolute;
+		right: 50px; top: 60px;
+		width: 70px; height: 70px;
+		border-radius: 10px;
+	}

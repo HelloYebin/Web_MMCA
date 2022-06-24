@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+* {margin: 0; padding: 0}
+	
+	section {
+		width: 90%;
+		margin: 0 auto;
+		position: relative;
+	}
+	#list {
+		width: 50%;
+	}
+	.show_info:hover {
+		cursor: pointer;
+	}
+	.show_info {
+		border: 1px solid black;
+		padding: 20px;
+		position: relative;
+		height: 190px;
+		box-sizing: border-box;
+		margin-bottom: 20px;
+	}
+	.show_poster {
+		width: 150px; height: 150px;
+		float: left;
+		margin-right: 20px;
+	}
+	.show_title {
+		font-weight: bold;
+	}
+	.show_desc {
+		color: gray;
+		font-size: 14px;
+	}
+	.open_close {
+		display: inline-block;
+		position: absolute;
+		top: 20px; right: 20px;
+		border: 2px solid red;
+		border-radius: 10px;
+		color: red;
+		font-weight: bold;
+		font-size: 12px;
+		padding: 3px;
+	}
+	.reserve_button {
+		position: absolute;
+		bottom: 20px; right: 20px;
+		width: 80px; height: 40px;
+	}
+	
+	#reserve_menu {
+		position: absolute;
+		top: 0px; right: 0px;
+		width: 45%;
+		box-shadow: 0px 0px 10px gray;
+		box-sizing: border-box;
+	}
+	#reserve_h3 {
+		text-align: center;
+		height: 50px;
+		padding: 13px;
+		box-sizing: border-box;
+		border-bottom: 2px solid silver;
+		background-color: black;
+		color: white;
+	}
+	.poster_large {
+		padding: 20px 0;
+		text-align: center;
+	}
+	.poster_large>h5 {
+		margin-bottom: 15px;
+	}
+	.reserve_menu_item1 {
+		height: 50px;
+		padding: 15px;
+		box-sizing: border-box;
+		border-bottom: 2px solid silver;
+		background-color: black;
+		color: white;
+	}
+	.reserve_show_poster {
+		width: 300px;
+		height: 300px;
+		background-color: gray;
+	}
+	#reserve_time_box {
+		padding: 15px;
+	}
+	#rn {
+		
+	}
+	#confirm {
+		text-align: center;
+		padding: 20px 0;
+	}
+	#reserve_confirm {
+		width: 120px; height: 80px;
+		border: 2px solid silver;
+		background-color: black;
+		color: white;
+		font-size: 20px;
+		font-weight: bold;
+	}

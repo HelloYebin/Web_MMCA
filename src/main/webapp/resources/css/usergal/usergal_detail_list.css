@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+#middle{
+	width: 90%;
+	margin: 0 auto;
+	overflow:hidden;
+	border-top: black 1px solid;
+	border-bottom:black 1px solid;
+}
+
+aside{
+	margin-top: 20px;
+	margin-bottom: 50px;
+	width: 15%;
+	height: 600px;
+	float:left;
+	background-color: #eee;
+	padding: 50px;
+	
+	border-top: black 1px solid;
+	border-bottom:black 1px solid;
+}
+
+section{
+	margin-top: 20px;
+	margin-bottom: 50px;
+	width: 65%;
+	float: left;
+	height: 600px;
+	padding: 50px;
+	
+	border-top: black 1px solid;
+	border-bottom:black 1px solid;
+}
+
+section:after{
+	clear:both;
+}
+
+h2{
+	display: inline-block;
+	margin: 30px;
+	font-weight: bolder;
+}
+
+#itemList{
+	margin: 5px;
+	margin-left: 25px;
+	font-size: 25px;
+	
+	/*color: #eee;*/
+}
+
+#digigalList{
+	margin: 5px;
+	margin-left: 25px;
+	font-size: 25px;
+	
+	/*border-bottom:2px black solid;*/
+}
+
+table{
+	margin: 0 auto;
+	width: 100%;
+	overflow: hidden;
+}
+
+.subMenu{
+	margin: 50px;	
+	font-size: 30px;
+	cursor: pointer;	
+}
+
+.itemBox{
+	display: inline-block;
+	width: 300px;
+	margin: 30px;
+	overflow:hidden;
+	border: lightgray 1px solid;
+}
+.itemBox:hover{
+	cursor: pointer;
+}
+
+.itemImg{
+	padding: 0;
+	border-bottom: lightgray 1px solid;
+}
+
+.itemDesc{
+	padding: 20px;
+	text-align: left;
+	font-size: 15px;
+	font-weight: bolder;
+	font-family: dodum;
+}
+
+#usergallTitle{
+	margin: 0px;
+	margin-top: 30px;
+	font-size: 30px;
+	text-align: left;
+	font-weight: bolder;
+}
+
+#usergalDesc{
+	margin-top: 20px;
+	font-size:12px;
+	font-weight: bolder;
+}
+
+.btnEmail{
+	width: 100%;
+	height: 50px;
+	color:white;
+	border-radius: 25px;
+	background-color: black;
+	
+}
+
+small{
+	display:block;
+	margin-top:50px;
+	font-weight: bolder;
+	color: #aaa;
+}

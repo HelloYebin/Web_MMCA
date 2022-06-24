@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+section{
+		margin: 0 auto;
+		padding: 20px;
+		width: 60%;
+	}
+	
+	h1{
+		display:block;
+		height: 80px;
+		font-size: 35px;
+		margin: 20px;
+	}
+	
+	table{
+		margin: 20px;
+	}
+	
+	td{
+		display:inline-block;
+		padding: 30px;
+		height: 80px;
+		margin-left: 50px;
+	}
+	
+	button{
+		margin-top:20px;
+		margin-left: 50px;
+		width: 600px;
+		height: 60px;
+		color: white;
+		background: #444;
+		padding: 15px;
+		font-size: 20px;
+		font-weight: 800;
+		font-family: dodum;
+		border-radius: 30px;
+	}

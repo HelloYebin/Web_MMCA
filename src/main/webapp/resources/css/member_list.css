@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+	* {margin: 0; padding: 0;}
+	
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+	  -webkit-appearance: none;
+	  margin: 0;
+	}
+	input {
+		line-height: 18px;
+		padding: 0 3px;
+	}
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+	th {
+		background-color: lightgray;
+	}
+	th, td {
+		padding: 3px 5px;
+	}
+	body section {
+		width: 90%;
+		margin: 0 auto;
+	}
+	form table {
+		width: 100%;
+	}
+	#res_table {
+		width: 100%;
+	}
+	.row:hover {
+		background-color: lightgray;
+	}
+	form div {
+		text-align: center;
+	}
+	form div button {
+		width: 120px; height: 50px;
+		background-color: silver;
+		border: 2px solid darkgray;
+		border-radius: 25px;
+		font-weight: bold;
+		font-size: 20px;
+		margin: 0 20px;
+	}
+	
+	#meminfo_bg {
+		background-color: rgba(0, 0, 0, 0.7);
+		position: absolute;
+		width: 100%; height: 150%;
+		top: 0; left: 0;
+	}
+	#meminfo_sc {
+		margin: 50px auto;
+		width: 70%;
+		background-color: white;
+		padding: 50px;
+		box-sizing: border-box;
+		border-radius: 30px;
+	}
+	.history {
+		height: 200px;
+		overflow-y: scroll;
+	}
+	#meminfo_sc table {
+		width: 100%;
+	}
+	#meminfo_sc div {
+		text-align: center;
+	}
+	#meminfo_sc>div>button {
+		width: 80px; height: 30px;
+		background-color: black;
+		border-radius: 5px;
+		font-weight: bold;
+		font-size: 15px;
+		color: white;
+		margin: 0 20px;
+	}

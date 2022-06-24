@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="mapper.notice">
+ 	
+ 	<insert id="insert" parameterType="com.web.vo.NoticeVO">
+ 	<choose>
+ 	<when test="nFile!=null">
+ 		 insert into notice values('no'||LPAD(noticeSeq.nextVal,4,0),#{nTitle},#{nContent},sysdate,0,#{nCategory},#{nFile},#{nSfile},#{nWriter})
+ 	 </when>
+ 	 <otherwise>
+ 	  	insert into notice values('no'||LPAD(noticeSeq.nextVal,4,0),#{nTitle},#{nContent},sysdate,0,#{nCategory},null,null,#{nWriter})
+ 	 </otherwise>
+ 		</choose> 
+ 	</insert>
+ 	
+ 	<select id="count" resultType="int">
+ 		select count(*) from notice
+ 	</select>
+ 	
+ 	<select id="selectList" parameterType="map" resultType="com.web.vo.NoticeVO">		
+		 select rno, nid, ntitle, ndate,ncategory from
+		(select rownum rno, nid, ntitle, to_char(ndate,'yyyy-mm-dd')ndate, ncategory from(
+		select nid,ntitle,ndate,ncategory from notice order by ndate desc)) where rno between #{start} and #{end}
+	</select>
+	
+	<select id="countSearchTitle"  parameterType="java.lang.String" resultType="int">
+ 		select count(*) from notice where ntitle like concat(concat('%',#{searchtext}),'%')	 
+ 	</select>
+ 	
+ 	<select id="countSearchContent"  parameterType="java.lang.String" resultType="int">
+ 		select count(*) from notice where ncontent like concat(concat('%',#{searchtext}),'%')	 
+ 	</select>
+ 	
+ 	<select id="countSearchCategory"  parameterType="java.lang.String" resultType="int">
+ 		select count(*) from notice where ncategory = #{searchtext}	 
+ 	</select>
+ 	
+ 	<select id="selectListSearchTitle" parameterType="map" resultType="com.web.vo.NoticeVO">		
+		 select rno, nid, ntitle, ndate,ncategory from
+		(select rownum rno, nid, ntitle, to_char(ndate,'yyyy-mm-dd')ndate, ncategory from(
+		select nid,ntitle,ndate,ncategory from notice where ntitle like concat(concat('%',#{searchtext}),'%')
+		 order by ndate desc)) where rno between #{start} and #{end}
+	</select>
+	
+	<select id="selectListSearchContent" parameterType="map" resultType="com.web.vo.NoticeVO">		
+		 select rno, nid, ntitle, ndate,ncategory from
+		(select rownum rno, nid, ntitle, to_char(ndate,'yyyy-mm-dd')ndate, ncategory from(
+		select nid,ntitle,ndate,ncategory from notice where ncontent like concat(concat('%',#{searchtext}),'%')
+		 order by ndate desc)) where rno between #{start} and #{end}
+	</select>
+	
+	<select id="selectListSearchCategory" parameterType="map" resultType="com.web.vo.NoticeVO">		
+select rno, nid, ntitle, ndate,ncategory from
+		(select rownum rno, nid, ntitle, to_char(ndate,'yyyy-mm-dd')ndate, ncategory from(
+		select nid,ntitle,ndate,ncategory from notice 
+		where ncategory=#{searchtext} order by ndate desc)) where rno between #{start} and #{end}
+	</select>
+ 	
+ 	<select id="content" parameterType="java.lang.String" resultType="com.web.vo.NoticeVO">
+ 	select nid,ntitle,ncontent,to_char(ndate,'yyyy-mm-dd')ndate,nfile,nsfile,
+nhits,ncategory,prevId,prevtitle,nextid,nexttitle,nwriter from
+(select nid,ntitle,ncontent,ndate,nhits,ncategory,nwriter,nfile,nsfile,
+lag(nid,1,0) over (order by ndate asc)prevId,
+lag(ntitle,1,0) over (order by ndate asc)prevTitle,
+lead(nid,1,0) over (order by ndate asc)nextId,
+lead(ntitle,1,0) over (order by ndate asc)nextTitle from notice) where nid=#{nId}
+ 	</select>
+ 	
+ 	<update id="update" parameterType="com.web.vo.NoticeVO">
+	<choose>
+		<when test="nFile!=null">
+		update notice set nTitle=#{nTitle},nFile=#{nFile},nSfile=#{nSfile},
+		nCategory=#{nCategory},nContent=#{nContent} where nid=#{nId}
+		
+ 		</when>
+ 		 <otherwise>
+ 		 update notice set nTitle=#{nTitle},
+		nCategory=#{nCategory},nContent=#{nContent} where nid=#{nId}
+ 		 </otherwise>
+ 	</choose>
+ 	</update>
+ 	
+ 	
+ 	<update id="updateHits" parameterType="java.lang.String">
+ 	update notice set nHits=nHits+1 where nid=#{nId}
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="java.lang.String">
+ 	delete from notice where nid=#{nId}
+ 	</delete>
+ 	
+ </mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="mapper.offnowMv">
+ 	<insert id="insert" parameterType="com.web.vo.OffNowVO">
+ 	insert into offNow values('ex'||LPAD(offnowSeq.nextVal,4,0),LPAD(offnowSeq.nextVal,4,0),
+	#{exCategory},#{exTitle},TO_DATE(#{exTermStart},'yyyy-mm-dd'),TO_DATE(#{exTermEnd},'yyyy-mm-dd'),
+	#{exPlace},0,#{exContent},#{exAuthor},#{exHost},#{exPrice},#{exPiece},#{exFile},#{exSfile})
+ 	</insert>
+ 	
+ 	<select id="count" resultType="int">
+ 	select count(exid) from offNow
+ 	</select>
+ 	
+ 	<select id="countSearch" parameterType="java.lang.String" resultType="int">
+ 	select count(exid) from offNow where exTitle like concat(concat('%',#{searchtext}),'%')
+ 	</select>
+ 	
+ 	<select id="countCategory" parameterType="java.lang.String" resultType="int">
+ 	select count(exid) from offnow where exCategory=#{category}
+ 	</select>
+ 	
+ 	<select id="selectList" parameterType="map" resultType="com.web.vo.OffNowVO">
+select rno,exid,exno, extitle, exfile,exsfile,TO_CHAR(extermstart,'yyyy-mm-dd') extermstart,TO_CHAR(extermend,'yyyy-mm-dd') extermend,excategory from(
+select rownum rno,exid,exno, extitle, exfile,exsfile,extermstart,extermend,excategory from(
+select exid,exno, extitle, exfile,exsfile,extermstart,extermend,excategory from offnow order by exno desc))where rno between #{start} and #{end}
+ 	</select>
+ 	
+ 	 		<select id="selectListSearch" parameterType="map" resultType="com.web.vo.OffNowVO">
+select rno,exid,exno, extitle, exfile,exsfile,TO_CHAR(extermstart,'yyyy-mm-dd') extermstart,TO_CHAR(extermend,'yyyy-mm-dd') extermend,excategory from(
+select rownum rno,exid,exno, extitle, exfile,exsfile,extermstart,extermend,excategory from(
+select exid,exno, extitle, exfile,exsfile,extermstart,extermend,excategory from offnow where exTitle like concat(concat('%',#{searchtext}),'%')
+ order by exno desc))where rno between #{start} and #{end}
+ 	</select>
+ 	
+ 	
+ 	
+ 		<select id="selectListCategory" parameterType="map" resultType="com.web.vo.OffNowVO">
+select rno,exid,exno, extitle, exfile,exsfile,TO_CHAR(extermstart,'yyyy-mm-dd') extermstart,TO_CHAR(extermend,'yyyy-mm-dd') extermend,excategory from(
+select rownum rno,exid,exno, extitle, exfile,exsfile,extermstart,extermend,excategory from(
+select exid,exno, extitle, exfile,exsfile,extermstart,extermend,excategory from offnow where exCategory=#{category} order by exno desc))where rno between #{start} and #{end}
+ 	</select>
+ <!-- 검색기능
+ 	<select id="countSearch" parameterType="java.lang.String" resultType="int">
+ 	select count(exid) from offnow where extitle like concat(concat('%',#{searchtext}),'%')
+ 	</select>
+ 	  
+ 	
+ 	
+ 		<select id="selectListSearch" parameterType="map" resultType="com.web.vo.DigitalMovieVO">
+ select rno,dmid, dmtitle, dmsfile,dmdate,dmhits,dmprogram from
+ 	(select rownum rno,dmid, dmtitle, dmsfile, to_char(dmdate,'yyyy-mm-dd')dmdate,dmhits,dmprogram from
+(select dmid, dmtitle, dmsfile, dmdate,dmhits,dmprogram from digitalMovie where dmtitle like concat(concat('%',#{searchtext}),'%') order by dmdate desc )) where rno between #{start} and #{end}
+ 	</select>
+ 	 -->
+ 	<select id="selectContent" parameterType="java.lang.String" resultType="com.web.vo.OffNowVO">
+ 		select exid,extitle,exfile,exsfile,exhost,exCategory,excontent,exhits,previd,prevtitle,nextid,
+ 		exPrice,exPiece,exPlace,TO_CHAR(extermstart,'yyyy-mm-dd') extermstart,TO_CHAR(extermend,'yyyy-mm-dd') extermend,exAuthor,
+ 		nexttitle from (select exid,extitle,exfile,exsfile,exhost,exCategory,excontent,exhits,
+ 		exPrice,exPiece,exPlace,exTermStart,exTermEnd,exAuthor,
+ 		lag(exid,1,0)over(order by exno)as previd,
+ 		lag(extitle,1,0)over(order by exno)as prevtitle,
+ 		lead(exid,1,0)over(order by exno)as nextid,
+ 		lead(extitle,1,0)over(order by exno)as nexttitle from offnow) where exid=#{exid}
+ 	</select>
+ 	
+ 	<delete id="deleteContent" parameterType="java.lang.String">
+ 		delete from offnow where exid=#{exid}
+ 	</delete>
+ 	
+ 	<update id="update" parameterType="com.web.vo.OffNowVO">
+	<choose>
+		<when test="exFile!=''">
+ 		update offnow set exTitle=#{exTitle}, exFile=#{exFile},exSfile=#{exSfile}
+ 		,extermstart=TO_DATE(#{exTermStart},'yyyy-mm-dd'),extermend=TO_DATE(#{exTermEnd},'yyyy-mm-dd')
+ 		,exAuthor=#{exAuthor},exHost=#{exHost},exPiece=#{exPiece},exPrice=#{exPrice}, explace=#{exPlace}
+ 		,exCategory=#{exCategory},exContent=#{exContent}
+ 		 where exid=#{exId}</when>
+ 		 <otherwise>
+ 		 update offNow set exTitle=#{exTitle}
+ 		 ,extermstart=TO_DATE(#{exTermStart},'yyyy-mm-dd'),extermend=TO_DATE(#{exTermEnd},'yyyy-mm-dd')
+ 		,exAuthor=#{exAuthor},exHost=#{exHost},exPiece=#{exPiece},exPrice=#{exPrice}, explace=#{exPlace}
+ 		,exCategory=#{exCategory},exContent=#{exContent}
+ 		 where exid=#{exId}
+ 		 </otherwise>
+ 	</choose>
+ 	</update>
+ 	
+ 	<update id="updateHit" parameterType="java.lang.String">
+ 		update offnow set exhits=exhits+1 where exId=#{exid}
+ 	</update>
+ </mapper>

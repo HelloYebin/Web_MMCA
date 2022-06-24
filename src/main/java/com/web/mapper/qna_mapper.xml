@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="mapper.qna">
+ 	
+ 	<insert id="insert" parameterType="com.web.vo.QnaVO">
+ 	<choose>
+ 	<when test="qFile!=null">
+ 		 insert into qna values('qa'||LPAD(qnaIdSeq.nextVal,4,0),#{qTitle},#{qContent}
+ 		 ,sysdate,0,#{qUserId},#{qFile},#{qSfile},qnaIdSeq.currval,0,0)
+ 	 </when>
+ 	 <otherwise>
+ 	  	insert into qna values('qa'||LPAD(qnaIdSeq.nextVal,4,0),#{qTitle},#{qContent}
+ 	 	,sysdate,0,#{qUserId},null,null,qnaIdSeq.currval,0,0)
+ 	 </otherwise>
+ 		</choose> 
+ 	</insert>
+ 	
+ 	<insert id="insertReply" parameterType="com.web.vo.QnaVO">
+ 	<choose>
+ 	<when test="qFile!=null">
+ 		 insert into qna values('qa'||LPAD(qnaIdSeq.nextVal,4,0),#{qTitle},#{qContent}
+ 		 ,sysdate,0,#{qUserId},#{qFile},#{qSfile},#{qOrigin},#{qGroup},#{qDepth})
+ 	 </when>
+ 	 <otherwise>
+ 	  	insert into qna values('qa'||LPAD(qnaIdSeq.nextVal,4,0),#{qTitle},#{qContent}
+ 	 	,sysdate,0,#{qUserId},null,null,#{qOrigin},#{qGroup},#{qDepth})
+ 	 </otherwise>
+ 		</choose> 
+ 	</insert>
+ 	
+ 	<select id="count" resultType="int">
+ 		select count(*) from qna
+ 	</select>
+ 	
+ 	<select id="countSearchTitle"  parameterType="java.lang.String" resultType="int">
+ 		select count(*) from qna where qtitle like concat(concat('%',#{searchtext}),'%')
+ 	</select>
+ 	
+ 	<select id="countSearchContent" parameterType="java.lang.String" resultType="int">
+ 		select count(*) from qna where qcontent like concat(concat('%',#{searchtext}),'%')
+ 	</select>
+ 	
+ 	<select id="countSearchUserId" parameterType="java.lang.String" resultType="int">
+ 		select count(*) from qna where quserid = #{searchtext}
+ 	</select>
+ 	
+ 	<select id="selectList" parameterType="map" resultType="com.web.vo.QnaVO">
+ 		
+ select rno,qid,qtitle,qdate,qhits,quserid,qorigin,qgroup,qdepth from 
+(select rownum rno,qid,qtitle,to_char(qdate,'yyyy-mm-dd')qdate,
+qhits,quserid,qorigin,qgroup,qdepth from(
+ select qid,qtitle,qdate,qhits,quserid,qorigin,
+ qgroup,qdepth from qna order by qorigin desc, qgroup asc))where rno between #{start} and #{end}
+ 	</select>
+ 	
+ 	<select id="selectListSearchTitle" parameterType="map" resultType="com.web.vo.QnaVO">
+ 		
+ select rno,qid,qtitle,qdate,qhits,quserid,qorigin,qgroup,qdepth from 
+(select rownum rno,qid,qtitle,to_char(qdate,'yyyy-mm-dd')qdate,
+qhits,quserid,qorigin,qgroup,qdepth from(
+ select qid,qtitle,qdate,qhits,quserid,qorigin,
+ qgroup,qdepth from qna where qtitle like concat(concat('%',#{searchtext}),'%') order by qorigin desc, qgroup asc))where rno between #{start} and #{end}
+ 	</select>
+ 	
+ 	<select id="selectListSearchContent" parameterType="map" resultType="com.web.vo.QnaVO">
+ 		
+ select rno,qid,qtitle,qdate,qhits,quserid,qorigin,qgroup,qdepth from 
+(select rownum rno,qid,qtitle,to_char(qdate,'yyyy-mm-dd')qdate,
+qhits,quserid,qorigin,qgroup,qdepth from(
+ select qid,qtitle,qdate,qhits,quserid,qorigin,
+ qgroup,qdepth from qna where qcontent like concat(concat('%',#{searchtext}),'%') order by qorigin desc, qgroup asc))where rno between #{start} and #{end}
+ 	</select>
+ 	
+ 	<select id="selectListSearchUserId" parameterType="map" resultType="com.web.vo.QnaVO">
+ 		
+ select rno,qid,qtitle,qdate,qhits,quserid,qorigin,qgroup,qdepth from 
+(select rownum rno,qid,qtitle,to_char(qdate,'yyyy-mm-dd')qdate,
+qhits,quserid,qorigin,qgroup,qdepth from(
+ select qid,qtitle,qdate,qhits,quserid,qorigin,
+ qgroup,qdepth from qna where quserid=#{searchtext} order by qorigin desc, qgroup asc))where rno between #{start} and #{end}
+ 	</select>
+ 	
+ 	
+ 	<select id="content" parameterType="java.lang.String" resultType="com.web.vo.QnaVO">
+ 	select qid,qtitle,qcontent,qhits,quserid,qfile,qsfile,previd,prevtitle,nextid,nexttitle,qdate ,qorigin,qgroup,qdepth
+from(select qid,qtitle,qcontent,qhits,quserid,qfile,qsfile,to_char(qdate,'yyyy-mm-dd')qdate,qorigin,qgroup,qdepth,
+ lag(qid,1,0)over(order by qorigin desc, qgroup asc)as previd,
+ 		lag(qtitle,1,0)over(order by qorigin desc, qgroup asc)as prevtitle,
+ 		lead(qid,1,0)over(order by qorigin desc, qgroup asc)as nextid,
+ 		lead(qtitle,1,0)over(order by qorigin desc, qgroup asc )as nexttitle from qna) where qid=#{qId}
+ 	</select>
+ 	
+ 	<select id="getGroupMax" parameterType="int" resultType="int">
+ 		select max(qgroup) from qna where qorigin=#{qOrigin}
+ 	</select>
+ 	
+ 	<update id="update" parameterType="com.web.vo.QnaVO">
+	<choose>
+		<when test="qFile!=null">
+		update qna set qTitle=#{qTitle},qContent=#{qContent},qFile=#{qFile},qSfie=#{qSfile} where qId=#{qId}
+ 		</when>
+ 		 <otherwise>
+ 		 update qna set qTitle=#{qTitle},qContent=#{qContent} where qId=#{qId}
+ 		 </otherwise>
+ 	</choose>
+ 	</update>
+ 	
+ 	<update id="updateReply" parameterType="map">
+ 	update qna set qgroup =qgroup+1 where qorigin=#{origin} and qgroup>=#{group}
+ 	</update>
+ 
+ 	<update id="updateHits" parameterType="java.lang.String">
+ 	update qna set qHits=qhits+1 where qid=#{qId}
+ 	</update>
+ 	<delete id="delete" parameterType="java.lang.String">
+ 	delete from qna where qid=#{qId}
+ 	</delete>
+ 	
+ </mapper>

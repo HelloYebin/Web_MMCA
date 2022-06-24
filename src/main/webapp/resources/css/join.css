@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+* {margin: 0; padding: 0;}
+
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+	  -webkit-appearance: none;
+	  margin: 0;
+	}
+	
+	#joinForm {
+		border: 1px solid black;
+		border-radius: 10px;
+		width: 600px; padding: 50px;
+		margin: 0 auto;
+	}
+	#joinForm h3 {
+		text-align: center;
+	}
+	table {
+		width: 100%;
+	}
+	table {
+		border-spacing: 20px;
+	}
+	table tr td:first-child {
+		width: 30%;
+		font-weight: bold;
+	}
+	table tr td:last-child {
+		width: 70%;
+	}
+	table tr td:last-child input {
+		line-height: 20px;
+		border-radius: 5px;
+		padding: 0 5px;
+	}
+	table tr td:last-child select {
+		height: 25px;
+		border-radius: 5px;
+		border: 2px solid darkgrey;
+	}
+	.email {
+		width: 100px;
+	}
+	.radio {
+		width: 15px;
+	}
+	.phone {
+		width: 40px;
+	}
+	form div {
+		text-align: center;s
+	}
+	form div button {
+		width: 100px; height: 60px;
+		margin: 0 10px;
+		border-radius: 10px;
+		background-color: black;
+		color: white; font-weight: bold; font-size: 18px;
+	}
+	#idcheck {
+		margin-left: 20px;
+		border-radius: 5px;
+		padding: 2px;
+		background-color: lightgreen;
+		color: white; font-weight: bold;;
+	}

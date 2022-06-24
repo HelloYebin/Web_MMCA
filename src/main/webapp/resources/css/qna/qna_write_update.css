@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+	* {
+		margin: 0; padding: 0;
+	}
+	section {
+		width: 800px;
+		margin: 0 auto;
+		padding: 50px 100px;
+		box-sizing: border-box;
+	}
+	table {
+		border-spacing: 0;
+		border-collapse: collapse;
+		width: 100%;
+	}
+	table tr th {
+		background-color: black;
+		color: white;
+	}
+	table tr td {
+		padding: 5px;
+	}
+	table tr td input {
+		border: none;
+		line-height: 24px;
+		padding: 0 5px; width: 90%;
+	}
+	table tr td input:focus {
+		outline-width: 1px;
+		outline-color: lightgray;
+	}
+	textarea {
+		width: 100%; min-height: 250px;
+		border: none; resize: none;
+	}
+	textarea:focus {
+		outline-width: 0;
+	}
+	form div {
+		text-align: center;
+	}
+	form div button {
+		width: 100px; height: 40px;
+		border: none; border-radius: 5px;
+		background-color: black; color: white;
+		font-size: 16px;
+		margin: 0 10px;
+	}
+	form div button:hover {
+		cursor: pointer;
+	}

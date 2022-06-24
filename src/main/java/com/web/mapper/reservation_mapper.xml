@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.reservation">
+	<select id="list" resultType="com.web.vo.PreReservationVO">
+		select * from reservation order by rstate desc
+	</select>
+	
+	<insert id="insert" parameterType="com.web.vo.PostReservationVO">
+		insert into RList values 
+			( 'r_'||Seq_RList_RID.nextval, #{rtitle}, #{rdate}, #{rtime}, #{rnum}, 0, #{id}, 0)
+	</insert>
+	
+	<update id="stateUpdate" parameterType="java.lang.String">
+		update reservation set rstate = case when rstate = 0 then 1 else 0 end 
+			where res_id = #{res_id}
+	</update>
+</mapper>

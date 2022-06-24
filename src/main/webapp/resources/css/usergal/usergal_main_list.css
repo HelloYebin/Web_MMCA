@@ -1,0 +1,166 @@
+@charset "UTF-8";
+
+h1{
+	margin: 25px;
+	text-indent: 20px;
+	font-size: 35px;
+}
+
+form{
+	margin: 10px;
+}
+
+#searchBar{
+	margin: 5px;
+	margin-left: 20px;
+}
+
+.pageNum{
+	
+	clear:both;
+	text-align: center;
+	height:50px;
+}
+
+section{
+
+	width: 90%;
+	margin: 5%;
+}
+
+table{
+	margin: 0 auto;
+	margin-top: 30px;
+	overflow: hidden;
+}
+
+td{
+	display: inline-block;
+	width: 30%;
+	min-width: 300px;
+	margin-left: 15px;
+	margin-right: 15px;
+	height: 400px;
+}
+
+#searchBar{
+	width: 300px;
+	height: 50px;
+	
+	border-style: none;
+	border-radius: 25px;
+	background-color: lightgray;
+	
+	padding-left: 20px;
+	 font-size: 15px; 
+}
+	
+.btnCollectionSearch{
+margin-left: 10px;
+height: 50px;
+color:white;
+background-color: black;
+border-radius: 25px;
+width: 150px; font-size: 20px; 
+}
+
+.btnCalModal{
+	margin-left: 10px;
+	height: 50px;
+	color: white;
+	background-color: gray;
+	border-radius: 25px;
+	width: 50px;
+	border-style: none;
+	text-align: center;
+}
+
+#colForm{
+	margin: 15px;
+	padding: 10px;
+	overflow: hidden;
+	
+}
+
+.itemTitle{
+	
+	font-size: 18px;
+	text-indent: 10px;
+}
+
+.itemInfo{
+	padding-left: 10%;
+	font-weight: bolder;
+}
+
+#formArea{
+	float:left;
+	
+	width: 70%
+}
+
+#btnArea{
+	float:right;
+	position: relative;
+	
+	width: 20%;
+	height: 100px;
+}
+
+#modalOpenBtn{
+position: absolute;
+right: 0px;
+bottom: 20px;
+width: 180px;	
+height: 50px;
+color:white;
+background-color: black;
+border-radius: 25px;
+width: 150px; font-size: 20px; 
+margin:10px;
+
+}
+
+#modalBackground{
+	position: fixed;
+	left:0;
+	top:0;
+	width:100%;
+	height: 100%;
+	background-color:rgba(0,0,0,0.4);
+	display:none;
+}
+
+#modalArea{
+	position:fixed;
+	left: 35%;
+	top: 33%;
+	width: 30%;
+	height: 34%;
+	display: block;
+	background-color: white;
+	padding: 50px;
+}
+
+#modalCloseBtn{
+	position: absolute;
+	right: 20px;
+	bottom: 10px;
+	width: 180px;	
+	height: 50px;
+	color:white;
+	background-color: black;
+	border-radius: 25px;
+	width: 150px; font-size: 20px; 
+	margin: 20px;
+}
+
+#createBtn{
+	width: 180px;	
+	height: 50px;
+	color:white;
+	background-color: black;
+	border-radius: 25px;
+	width: 150px; font-size: 20px; 
+	margin:10px;
+}

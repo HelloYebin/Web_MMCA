@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="mapper.digitalMv">
+ 	<insert id="insert" parameterType="com.web.vo.DigitalMovieVO">
+ 	insert into digitalMovie values('dm'||LPAD(dmvSeq.nextVal,4,0),#{dmTitle},#{dmUrl},#{dmFile},#{dmSfile},#{dmContent},sysdate,0,#{dmProgram},#{dmCategory})
+ 	</insert>
+ 	
+ 	<select id="count" resultType="int">
+ 	select count(dmid) from digitalMovie
+ 	</select>
+ 	
+ 	<select id="countSearch" parameterType="java.lang.String" resultType="int">
+ 	select count(dmid) from digitalMovie where dmtitle like concat(concat('%',#{searchtext}),'%')
+ 	</select>
+ 	  
+ 	<select id="selectList" parameterType="map" resultType="com.web.vo.DigitalMovieVO">
+ 	select rno,dmid, dmtitle, dmsfile,dmdate,dmhits,dmprogram from
+ 	(select rownum rno,dmid, dmtitle, dmsfile, to_char(dmdate,'yyyy-mm-dd')dmdate,dmhits,dmprogram from
+(select dmid, dmtitle, dmsfile, dmdate,dmhits,dmprogram from digitalMovie order by dmdate desc))where rno between #{start} and #{end}
+
+
+ 	</select>
+ 	
+ 		<select id="selectListSearch" parameterType="map" resultType="com.web.vo.DigitalMovieVO">
+ select rno,dmid, dmtitle, dmsfile,dmdate,dmhits,dmprogram from
+ 	(select rownum rno,dmid, dmtitle, dmsfile, to_char(dmdate,'yyyy-mm-dd')dmdate,dmhits,dmprogram from
+(select dmid, dmtitle, dmsfile, dmdate,dmhits,dmprogram from digitalMovie where dmtitle like concat(concat('%',#{searchtext}),'%') order by dmdate desc )) where rno between #{start} and #{end}
+ 	</select>
+ 	
+ 	<select id="selectContent" parameterType="java.lang.String" resultType="com.web.vo.DigitalMovieVO">
+ 		select dmid,dmtitle,dmsfile,dmfile,dmurl,dmProgram,dmCategory,dmcontent,dmhits,previd,prevtitle,nextid,
+ 		nexttitle from (select dmid,dmtitle,dmurl,dmcontent,dmhits,dmsfile,dmfile,dmProgram,dmCategory,
+ 		lag(dmid,1,0)over(order by dmdate)as previd,
+ 		lag(dmtitle,1,0)over(order by dmdate)as prevtitle,
+ 		lead(dmid,1,0)over(order by dmdate)as nextid,
+ 		lead(dmtitle,1,0)over(order by dmdate)as nexttitle from digitalMovie) where dmid=#{dmid}
+ 	</select>
+ 	
+ 	<delete id="deleteContent" parameterType="java.lang.String">
+ 		delete from digitalMovie where dmid=#{dmid}
+ 	</delete>
+ 	
+ 	<select id="getSfile" parameterType="java.lang.String" resultType="java.lang.String">
+ 		select dmsfile from digitalMovie where dmid=#{dmid}
+ 	</select>
+ 	
+ 	<update id="update" parameterType="com.web.vo.DigitalMovieVO">
+	<choose>
+		<when test="dmFile!=null">
+ 		update digitalMovie set dmTitle=#{dmTitle}, dmUrl=#{dmUrl}, dmFile=#{dmFile},dmSfile=#{dmSfile}
+ 		,dmProgram=#{dmProgram},dmCategory=#{dmCategory},dmContent=#{dmContent}
+ 		 where dmid=#{dmId}</when>
+ 		 <otherwise>
+ 		 update digitalMovie set dmTitle=#{dmTitle}, dmUrl=#{dmUrl}
+ 		,dmProgram=#{dmProgram},dmCategory=#{dmCategory},dmContent=#{dmContent}
+ 		 where dmid=#{dmId}
+ 		 </otherwise>
+ 	</choose>
+ 	</update>
+ 	
+ 	<update id="updateHit" parameterType="java.lang.String">
+ 		update digitalMovie set dmhits=dmhits+1 where dmId=#{dmid}
+ 	</update>
+ </mapper>

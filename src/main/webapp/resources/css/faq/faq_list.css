@@ -1,0 +1,156 @@
+@charset "UTF-8";
+
+	body{
+		width:100%;
+		height: 100%;
+	}
+	h2{
+		display: block;
+		font-size: 40px;
+		text-indent: 20px;
+		margin: 20px;
+	}
+	table{
+		boarder:1px black solid;
+		padding: 20px;
+		width: 100%;
+		height: 40%;
+	}
+	
+	.subMenu{
+		display:block;
+		padding: 20px;
+				
+		border-top: 1px black solid;
+		border-bottom: 1px black solid;
+	}
+	
+	.subMenu:after{
+	clear:both;
+	}
+	
+	.faqTitle{
+		
+		
+		font-size: 16px;
+		font-family: gulim;
+		text-indent: 20px;
+		border: 2px black solid;
+		padding: 0px;
+		margin: 10px;
+		cursor:pointer;
+		width: 80%;
+		min-height: 50px;
+		
+
+	}
+	.titleText{
+		padding: 10px;
+		display: block;
+		font-weight: bold;
+	}
+	
+	.faqContent{
+		
+		border:none;
+		border-top:2px solid black;
+		display:none;
+		background: #e0e0e0;
+
+	}
+	
+	.faqContent:after{
+		clear:right;
+	}
+	
+	.contentBox{
+		min-height: 200px;
+		padding: 20px;
+	}
+	
+	.btnBox{
+		height: 40px;
+		padding: 15px;
+	}
+	
+	
+	ul{
+		display:block;
+		list-style-type: none;
+	}
+	
+	button{
+		background-color: #111;
+		color:#eee;
+	}
+	
+	.btn_normal{
+		float:right;
+		margin:10px;
+		width:100px;
+		height:40px;
+		font-size: 20px;
+		border-radius:20px;
+	}
+	
+	.btn_small{
+		float:right;
+		margin:10px;
+		width:60px;
+		height:26px;
+		border-radius:3px;
+	}
+	
+	section{
+		margin: 0 auto;
+	}
+	
+	#qnaBtn{
+		margin-top: 5px;
+		font-size: 18px;
+		font-weight: bold;
+		font-family: sans-serif;
+		padding: 20px;
+		height:30px;
+		float:right;
+		cursor:pointer;
+	}
+	
+	#smenuBtn{
+		font-size: 24px;
+		font-weight: bold;
+		font-family: sans-serif;
+		color:#eee;
+		padding: 20px;
+		height:30px;
+		float:left;
+		margin-bottom: 10px;
+	}
+	
+	.listBtn{
+		cursor:pointer;
+	}
+	
+	form button{
+		background: black;
+		color:white;
+		width: 50px;
+		height: 30px;
+		border-radius: 10px;
+		margin-left: 20px;
+	}
+	
+	form input{
+		width:  300px;
+		height: 25px;
+	}
+	
+	form select{
+		width: 60px;
+		height: 30px;
+		margin-right: 20px;
+	}
+	
+	.qIcon{
+		vertical-align: middle;
+	}

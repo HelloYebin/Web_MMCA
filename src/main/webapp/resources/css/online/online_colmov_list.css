@@ -1,0 +1,271 @@
+@charset "UTF-8";
+
+h1{
+	margin: 25px;
+	text-indent: 20px;
+	font-size: 35px;
+}
+
+form{
+	margin: 10px;
+}
+
+#searchBar{
+	margin: 5px;
+	margin-left: 20px;
+}
+
+.pageNum{
+	
+	clear:both;
+	text-align: center;
+	height:50px;
+}
+
+section{
+
+	width: 90%;
+	margin: 5%;
+}
+
+table{
+	margin: 0 auto;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	overflow: hidden;
+	min-width: 100%;
+	text-align: center;
+}
+
+tr{
+	overflow: hidden;
+}
+
+ .digitalMvBox{
+	display: inline-block;
+	width: 20%;
+	min-width: 200px;
+	margin-left: 2%;
+	margin-right: 2%;
+	height: 400px;
+}
+
+.digitalMvImg{
+	max-width: 100%;
+	max-height: 200px;	
+}
+
+.digitalColImg{
+	max-width: 100%;
+	max-height: 200px;	
+}
+
+.digitalColBox{
+	display: inline-block;
+	width: 15%;
+	max-width: 300px;
+	min-width: 200px;
+	margin-left: 4%;
+	margin-right: 4%;
+	height: 400px;
+}
+
+#searchBar{
+	width: 300px;
+	height: 50px;	
+	border-style: none;
+	border-radius: 25px;
+	background-color: lightgray;	
+	padding-left: 20px;
+	font-size: 15px; 
+}
+	
+.btnCollectionSearch{
+	margin-left: 10px;
+	height: 50px;
+	color:white;
+	background-color: black;
+	border-radius: 25px;
+	width: 150px; font-size: 20px; 
+}
+
+.btnCalModal{
+	margin-left: 10px;
+	height: 50px;
+	color: white;
+	background-color: gray;
+	border-radius: 25px;
+	width: 50px;
+	border-style: none;
+	text-align: center;
+}
+
+.btnList{
+	float:right;
+	margin-right: 40px;
+	height: 50px;
+	color:white;
+	background-color: black;
+	border-radius: 25px;
+	width: 150px; font-size: 20px;
+}
+
+#colForm{
+	margin: 15px;
+	padding: 10px;
+	overflow: hidden;
+}
+
+#digitalForm{
+	float:left;
+	width: 75%;
+}
+
+#btnArea{
+	float:right;
+	width:15%;
+	padding: 10px;
+}
+
+.itemArtist{
+	margin:0px;
+	display:block;
+	font-size: 15px;
+}
+
+.itemCategory{
+	margin:0px;
+	display:block;
+	font-size: 15px;
+	
+}
+
+.itemTitle{
+	
+	display:block;	
+	margin-top:10px;
+	margin-bottom:10px;
+	font-size: 20px;
+	padding:0px;
+	
+}
+
+.itemYear{
+	margin:0px;
+	display:block;
+	font-size: 14px;
+	color:#666666;
+	
+}
+
+.itemDay{
+	margin:0px;
+	display:block;
+	font-size: 16px;
+	color:#666666;
+	
+}
+
+.itemInfo{
+	text-align: left;
+	font-weight: 1000;
+	font-family: gothic;
+	
+}
+
+.imgArea{
+	display: flex; 
+	justify-content:center;
+	height:200px;
+}
+
+a{
+		text-decoration: none;
+		color: #111;
+	}
+	
+	a:hover{
+		color: #888;
+	}
+	
+	
+.btnList{
+	float:right;
+	margin-right: 40px;
+	height: 50px;
+	color:white;
+	background-color: black;
+	border-radius: 25px;
+	width: 150px; font-size: 20px;
+}
+
+#digitalForm{
+	clear:both;
+	float:left;
+}
+
+#btnArea{
+	float:right;
+	padding: 10px;
+}
+
+.imgArea{
+	display: flex; 
+	justify-content:center;
+	height:200px;
+}
+
+
+
+#submenu{
+	text-indent: 40px;
+	font-size: 25px;
+	font-weight: bolder;
+}
+
+#selectArea{
+	display: flex;
+	position: relative;
+	width: 60%;	
+	background-color: #eee;
+	margin: 10px;
+	padding: 30px;
+	height: 350px;
+	border-radius: 10px;
+	border: 1px solid black;
+}
+
+#categorySearch{
+	clear:both;
+	position: absolute;
+	bottom: 0px;
+	right:0px;
+	margin: 20px;
+	padding: 0px;
+}
+
+#categorySelTable{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+
+
+}
+
+#categorySelTable th{
+	width: 120px;
+}
+
+.selBtn{
+	display: inline-block;
+	background: white;
+	font-size: 18px;
+	height: 30px;
+	padding : 6px;
+	border: 1px solid black;
+	border-radius: 20px;
+	margin: 5px;
+	float:left;
+	cursor:pointer;
+}
+

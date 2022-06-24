@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="mapper.collection">
+ 	<insert id="insert" parameterType="com.web.vo.CollectionVO">
+ 		insert into collection values('co'||LPAD(colSeq.nextVal,4,0),#{coTitle},#{coFile},#{coSfile},#{coContent},sysdate,0
+ 		,#{coAuthorKor},#{coAuthorEng},#{coName},#{coYear},#{coMaterial},#{coDim},#{coCategory},#{formCategory}||LPAD(colSeq.currVal,4,0),#{coIsDisp})
+ 	</insert>
+ 	
+ 		<select id="count" resultType="int">
+ 	select count(*) from collection
+ 	</select>
+ 	
+ 	<select id="countSearch" parameterType="java.lang.String" resultType="int">
+ 	select count(*) from collection where coTitle like concat(concat('%',#{searchtext}),'%')
+ 	</select>
+ 
+ 	<select id="selectList" parameterType="map" resultType="com.web.vo.CollectionVO">
+ 	select rno,coid, cosfile, coAuthorKor, coAuthorEng, 
+ 	cotitle, coYear from(
+select rownum rno,coid, cosfile, coAuthorKor, coAuthorEng, 
+ 	cotitle, coYear from
+(select coid, cosfile, coAuthorKor, coAuthorEng, 
+ 	cotitle, coYear,codate from collection ORDER BY codate desc)) where rno between #{start} and #{end} 
+ 	</select>
+ 	
+ 	<select id="selectListSearch" parameterType="map" resultType="com.web.vo.CollectionVO">
+ 	select rno,coid, cosfile, coAuthorKor, coAuthorEng, 
+ 	cotitle, coYear from(
+select rownum rno,coid, cosfile, coAuthorKor, coAuthorEng, 
+ 	cotitle, coYear from
+(select coid, cosfile, coAuthorKor, coAuthorEng, 
+ 	cotitle, coYear,codate from collection ORDER BY codate desc) where coTitle like concat(concat('%',#{searchtext}),'%')) where rno between #{start} and #{end} 
+ 	</select>
+ 	
+ 	<select id="selectContent" parameterType="java.lang.String" resultType="com.web.vo.CollectionVO">
+ 	select coid,cotitle,cofile,cosfile,cocontent,cohits,coauthorkor,coauthoreng,
+        coname,coyear,comaterial,cocategory,comanageid,codim,coisdisp,previd,prevtitle,nextid,nexttitle
+        from (select coid,cotitle,cofile,cosfile,cocontent,cohits,coauthorkor,coauthoreng,
+        coname,coyear,comaterial,comanageid,codim,coisdisp,cocategory,
+ 		lag(coid,1,0)over(order by codate)as previd,
+ 		lag(cotitle,1,0)over(order by codate)as prevtitle,
+ 		lead(coid,1,0)over(order by codate)as nextid,
+ 		lead(cotitle,1,0)over(order by codate)as nexttitle from collection) where coid=#{coId}
+ 	</select>
+ 	
+ 		<update id="updateHit" parameterType="java.lang.String">
+ 		update collection set cohits=cohits+1 where coId=#{coId}
+ 	</update>
+ 	
+ 	<delete id="deleteContent" parameterType="java.lang.String">
+ 	delete from collection where coid=#{coId}
+ 	</delete>
+ 	
+ 	<update id="update" parameterType="com.web.vo.CollectionVO">
+ 	<choose>
+ 	<when test="coFile!=null">
+ 	update collection set cotitle=#{coTitle},cofile=#{coFile},cosfile=#{coSfile},
+ 	coAuthorKor=#{coAuthorKor},coAuthorEng=#{coAuthorEng},coName=#{coName} ,
+ 	coYear=#{coYear},coMaterial=#{coMaterial},coDim=#{coDim},coCategory=#{coCategory},
+ 	coIsDisp=#{coIsDisp},coContent=#{coContent} where coid=#{coId}</when>
+ 	<otherwise>
+ 	update collection set cotitle=#{coTitle},
+ 	coAuthorKor=#{coAuthorKor},coAuthorEng=#{coAuthorEng},coName=#{coName} ,
+ 	coYear=#{coYear},coMaterial=#{coMaterial},coDim=#{coDim},coCategory=#{coCategory},
+ 	coIsDisp=#{coIsDisp},coContent=#{coContent} where coid=#{coId}
+ 	</otherwise>
+ 	</choose>
+ 	</update>
+ </mapper>

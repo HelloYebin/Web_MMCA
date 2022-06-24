@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+
+section{
+	width: 60%;
+	margin: 0 auto;
+	padding-top:50px;
+}
+h1{
+	display:inline-block;
+	font-size: 35px;
+	font-weight: bolder;
+	
+	padding-bottom: 50px;
+}
+
+.imgContentBox{
+	text-align: center;
+	min-height: 500px;
+	padding: 50px;
+}
+
+table{
+	
+	width: 100%;
+	font-size: 15px;
+}
+th{
+	padding: 20px;
+	width: 100px;
+}
+
+td{
+	padding: 10px;
+}
+
+tr{
+
+	height: 20px;
+}
+
+p{
+	display: block;
+	margin-left: 20px;
+	width: 60%;
+}
+
+.bottomBox{
+	padding-left: 50px;
+	width:100px;	
+}
+
+.bottomTr{
+	cursor:pointer;
+}
+
+.dispIcon{
+	width: 60px;
+	height: 25px;
+	color:white;
+	background-color: darkgray;
+	text-align: center;
+	padding-top: 5px;
+	border-radius: 15px;
+}
+
+#dispImg{
+	width: 400px;
+	height: 500px;
+	border: lightgray 1px solid;
+}
+
+.btnList{
+	width: 100px;
+	height: 40px;
+	color: white;
+	background-color: black;
+	border-radius: 20px;
+	cursor: pointer;
+	float:right;
+	margin: 20px;
+	font-size: 16px;
+	font-weight: bolder;
+}
+
+.btnList:after {
+	clear:both;
+}
+
+.btnSlide{
+	margin-top: 20px;
+	margin-left: 50px;
+	margin-bottom: 30px;
+	
+	border: 1px #333 solid;
+	width: 100px;
+	height: 30px;
+	border-radius: 15px;
+	background: white;
+	font-size: 12px;
+	font-family: dodum;
+	font-weight: bold;
+	
+	cursor:pointer;
+}
+small{
+	display:block;
+	float:right;
+	padding-top: 40px;
+}
+
+#descBox{
+	height:auto;
+}

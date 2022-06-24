@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="mapper.faq">
+ 	
+ 	<insert id="insert" parameterType="com.web.vo.FaqVO">
+ 		insert into faq values('fa'||LPAD(faqSeq.nextval,4,0),#{faTitle},#{faContent},#{faCategory})
+ 	</insert>
+ 	
+ 	<select id="count" resultType="int">
+ 		select count(*) from faq where facategory=#{faCategory}
+ 	</select>
+ 	
+ 		<select id="selectList" parameterType="map" resultType="com.web.vo.FaqVO">		
+		 select rno,faid,fatitle,facontent,facategory from
+		 (select rownum rno,faid,fatitle,facontent,facategory from faq where facategory=#{faCategory})  WHERE rno BETWEEN #{start} and #{end}
+	</select>
+ 	
+ 	<select id="selectContent" parameterType="java.lang.String" resultType="com.web.vo.FaqVO">
+ 		select faid,fatitle,facontent,facategory from faq where faid=#{faId}
+ 	</select>
+ 	
+ 	<update id="update" parameterType="com.web.vo.FaqVO">
+		update faq set fatitle=#{faTitle}, facontent=#{faContent}, faCategory=#{faCategory} where faId=#{faId}		
+ 	</update>
+ 	 
+ 	<delete id="deleteContent" parameterType="java.lang.String">
+ 		delete from faq where faid=#{faId}
+ 	</delete>
+ 	
+ </mapper>

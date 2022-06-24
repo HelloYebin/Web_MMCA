@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="mapper.dispcomment">
+ 	
+ 	 <insert id="insert" parameterType="com.web.vo.DispCommentVO">
+ 	
+ 	<choose>
+ 	<when test="cmFile!=null">
+ 		insert into dispComment values('cm'||LPAD(commentSeq.nextVal,4,0),
+ 		#{cmTitle},#{cmDisp},#{cmUserId},#{cmContent},
+		#{cmFile},#{cmSfile},sysdate,0,commentSeq.currVal)
+ 	 </when>
+ 	 <otherwise>
+ 	  	insert into dispComment values('cm'||LPAD(commentSeq.nextVal,4,0),
+ 		#{cmTitle},#{cmDisp},#{cmUserId},#{cmContent},
+		null,null,sysdate,0,commentSeq.currVal)
+ 	 </otherwise>
+ 		</choose> 
+ 	</insert>
+ 	
+ 	
+ 	<select id="count" resultType="int">
+ 		select count(*) from dispcomment
+ 	</select>
+ 	
+ 	<select id="countSearchTitle" resultType="int">
+ 		select count(*) from dispcomment where cmtitle like concat(concat('%',#{searchtext}),'%' )
+ 	</select>
+ 	
+ 	<select id="countSearchContent" resultType="int">
+ 		select count(*) from dispcomment where cmcontent like concat(concat('%',#{searchtext}),'%' )
+ 	</select>
+ 	
+ 	<select id="countSearchUserId" resultType="int">
+ 		select count(*) from dispcomment where cmuserid=#{searchtext}
+ 	</select>
+ 	
+ 	<select id="selectList" parameterType="map" resultType="com.web.vo.DispCommentVO">
+ 		
+ 	select  rno,cmid,cmtitle,cmdisp,cmuserid,cmcontent,to_char(cmdate,'yyyy-mm-dd')cmdate,cmhits,cmno from(
+	select rownum rno,cmid,cmtitle,cmdisp,cmuserid,cmcontent,cmdate,cmhits,cmno
+	from dispComment order by cmno desc) where rno between #{start} and #{end}
+ 	</select>
+ 	
+ 	<select id="selectListSearchTitle" parameterType="map" resultType="com.web.vo.DispCommentVO">
+ 		
+ 	select  rno,cmid,cmtitle,cmdisp,cmuserid,cmcontent,to_char(cmdate,'yyyy-mm-dd')cmdate,cmhits,cmno from(
+	select rownum rno,cmid,cmtitle,cmdisp,cmuserid,cmcontent,cmdate,cmhits,cmno
+	from dispComment where cmtitle like concat(concat('%',#{searchtext}),'%' ) order by cmno desc) where rno between #{start} and #{end}
+ 	</select>
+ 	
+ 	<select id="selectListSearchContent" parameterType="map" resultType="com.web.vo.DispCommentVO">
+ 		
+ 	select  rno,cmid,cmtitle,cmdisp,cmuserid,cmcontent,to_char(cmdate,'yyyy-mm-dd')cmdate,cmhits,cmno from(
+	select rownum rno,cmid,cmtitle,cmdisp,cmuserid,cmcontent,cmdate,cmhits,cmno
+	from dispComment where cmcontent like concat(concat('%',#{searchtext}),'%' ) order by cmno desc) where rno between #{start} and #{end}
+ 	</select>
+ 	
+ 	<select id="selectListSearchUserId" parameterType="map" resultType="com.web.vo.DispCommentVO">
+ 		
+ 	select  rno,cmid,cmtitle,cmdisp,cmuserid,cmcontent,to_char(cmdate,'yyyy-mm-dd')cmdate,cmhits,cmno from(
+	select rownum rno,cmid,cmtitle,cmdisp,cmuserid,cmcontent,cmdate,cmhits,cmno
+	from dispComment where cmuserid=#{searchtext} order by cmno desc) where rno between #{start} and #{end}
+ 	</select>
+ 	 
+ 	<select id="content" parameterType="java.lang.String" resultType="com.web.vo.DispCommentVO">
+		select cmid, cmtitle,cmcontent,cmdisp,cmuserid,to_char(cmdate,'yyyy-mm-dd')cmdate,cmhits,
+		prevId,prevTitle,nextid,nexttitle
+		from (select cmid, cmtitle,cmcontent,cmdisp,cmuserid,cmdate,cmhits,
+		lag(cmid,1,0) over(order by cmdate asc) prevId,
+		lag(cmTitle,1,0) over(order by cmdate asc) prevTitle,
+		lead(cmid,1,0) over(order by cmdate asc) nextId,
+		lead(cmTitle,1,0) over(order by cmdate asc) nextTitle from dispComment) where cmid=#{cmId}
+	</select>
+ 	 
+ 	<update id="update" parameterType="com.web.vo.DispCommentVO">
+	<choose>
+		<when test="cmFile!=null">
+		update dispComment set cmTitle=#{cmTitle},cmContent=#{cmContent},cmFile=#{cmFile},cmSfie=#{cmSfile},cmDisp=#{cmDisp} where cmId=#{cmId}
+ 		</when>
+ 		 <otherwise>
+ 		 update dispComment set cmTitle=#{cmTitle},cmContent=#{cmContent},cmDisp=#{cmDisp} where cmId=#{cmId}
+ 		 </otherwise>
+ 	</choose>
+ 	</update>
+ 	
+ 	<update id="updateHits" parameterType="java.lang.String">
+ 	update dispComment set cmHits=cmhits+1 where cmid=#{cmId}
+ 	</update>
+ 	<delete id="delete" parameterType="java.lang.String">
+ 	delete from dispComment where cmid=#{cmId}
+ 	</delete>
+ 	 
+ </mapper>

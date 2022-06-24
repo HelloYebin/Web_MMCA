@@ -1,0 +1,167 @@
+<style type="text/css">
+	*{
+	margin: 0px; padding: 0px;
+	}
+	
+	#museum{
+	width: 100%; height: 780px;
+	}
+	
+	#mmca{
+	width: 690px; height: 150px; background: #007843;
+	left: 40px; top: -100px; position: relative;
+	text-align: center; font-size: 65pt; 
+	padding-top: 20px;
+	}
+	
+	#info_detail{
+	text-decoration: underline;
+	}
+	
+	#info{
+	width: 900px; float: right;margin-right: 50px;
+	}
+	
+	.info1{
+	font-size: 30pt;
+	}
+	
+	.info2{
+	font-size: 15pt;
+	}
+	
+	th{
+	font-size: 25pt; font-weight: bold;
+	}
+	
+	tr{
+	text-align: center;
+	}
+	
+	.up1{
+	height: 900px; background-color: #939597; margin-top: -4px;
+	}
+	
+	.up2{
+	width: 1250px; margin: 40px auto;
+	}
+	
+	table td{
+	width: 400px;
+	}
+	
+	.td1{
+	vertical-align: middle;
+	}
+	
+	.td2{
+	text-align: center; font-size: 15pt; font-weight: bold; height: 50px;
+	}
+
+	
+	/* ¿ÃπÃ¡ˆ*/
+	.container {
+	position: relative;
+	width: 250px;
+	height: 330px;
+	margin-top: 20px;
+	}
+	
+	.image {
+	opacity: 1;
+	display: block;
+	width: 100%;
+	height: 330px;
+	transition: .5s ease;
+	backface-visibility: hidden;
+	}
+	
+	.middle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	text-align: center;
+	}
+	
+	.container:hover .image {
+	opacity: 0.3;
+	}
+	
+	.container:hover .middle {
+	opacity: 1;
+	}
+	
+	.text {
+	background-color: #04AA6D;
+	color: white;
+	font-size: 10px;
+	padding: 16px 25px;
+	cursor: pointer;
+	}
+	
+	.test{
+	border-bottom: 1px solid black;
+	margin-top: 30px;
+	width: 250px;
+	padding-bottom: 10px;
+	}
+	
+	.modal_content{
+	background-color: white;
+	width: 1000px;
+	height: 550px;
+	position: fixed;
+	left: 22%;
+	top: 15%;
+	display: none;
+	padding: 40px;
+	}
+	
+	.modal{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	display: none;
+	left : 0;
+	top: 0;
+	background-color: rgba(147,149,151,0.9);
+	}
+
+	.modal_picture{
+	width: 28%;
+	height: 80%;
+	float: left;
+	padding-left: 50px;
+	}
+	
+	.modal_info{
+	width: 60%;
+	height: 80%;
+	float: right;
+	}
+	
+	.modal_content h1{
+	padding-bottom: 20px; 
+	}
+	
+	.modal_content hr{
+	margin-bottom: 40px; 
+	}
+
+	#modal_close_btn{
+	position : absolute;
+	left: 45%;
+	top: 93%;
+	}
+	
+	#modal_detail_btn{
+	position: absolute;
+	left: 52%;
+	top: 93%;
+	}
+
+</style>
